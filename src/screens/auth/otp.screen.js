@@ -15,7 +15,7 @@ const OtpScreen = ({navigation}) => {
   const [code, setCode] = React.useState('');
 
   const submit = () => {
-    if (number.trim() == '' || number == null) {
+    if (number.trim() === '' || number === null) {
       alert('please enter number');
     }
   };

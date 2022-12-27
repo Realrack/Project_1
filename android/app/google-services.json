@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "265536361557",
+    "project_id": "indiancoding-4821c",
+    "storage_bucket": "indiancoding-4821c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265536361557:android:9c89ab4b61abbaf79cb0dc",
+        "android_client_info": {
+          "package_name": "com.project_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265536361557-bv6li4nop3tganaonnshhe1uadnantq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARjOqhW_yqJeNkQzDZzMFhgPapDz1cy9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265536361557-bv6li4nop3tganaonnshhe1uadnantq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

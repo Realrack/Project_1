@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-paper';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import BaseView from '../../components/baseView.component';
 import {theme} from '../../infrastructure/theme';
@@ -13,22 +12,29 @@ import Loader from '../../components/loader.component';
 
 const LoginScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(true);
-  const [username, setUsername] = useState(__DEV__ ? 'ashish@gmail.com' : '');
+  const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
   const [password, setPassword] = useState(__DEV__ ? '123456789' : '');
   const [loading, setLoading] = useState(false);
 
   const login = () => {
-    if (username == '' && password == '') {
+    if (email === '' && password === '') {
       alert('please enter Data');
-    } else if (username.trim() == '' || username == 'null') {
-      alert('enter your username');
-    } else if (password.trim() == '' || password == 'null') {
+    } else if (email.trim() === '' || email === null) {
+      alert('enter your email');
+    } else if (password.trim() === '' || password === null) {
       alert('enter your password');
     } else {
       setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+      CreatUser(email, password)
+        .then(res => {
+          console.log(res, 'usercreate');
+          alert(res);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.log(error, 'createusererror');
+          setLoading(false);
+        });
     }
   };
 
@@ -40,8 +46,8 @@ const LoginScreen = ({navigation}) => {
       </Text>
       <InputContainer>
         <Input
-          value={username}
-          setValue={text => setUsername(text)}
+          value={email}
+          setValue={text => setEmail(text)}
           label="Email"
           left={
             <TextInput.Icon

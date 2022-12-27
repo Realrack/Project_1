@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import CreatUser from '../../network/auth';
 
 import {TextInput} from 'react-native-paper';
 
@@ -9,6 +10,7 @@ import Input from '../../components/input.component';
 import BackButton from '../../components/backButton.component';
 import InputContainer from '../../components/inputContainer.component';
 import Text from '../../components/text.component';
+import Loader from '../../components/loader.component';
 
 const SignupScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(true);
@@ -17,9 +19,26 @@ const SignupScreen = ({navigation}) => {
   const [password, setPassword] = useState();
   const [name, setName] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [loading, setLoading] = useState(false);
+
+  const submit = () => {
+    if (
+      name.trim() === '' ||
+      (name == 'null' && email.trim() == '') ||
+      (email == 'null' && password.trim() == '') ||
+      (password == 'null' && confirmPassword.trim() == '') ||
+      confirmPassword == 'null'
+    ) {
+      alert('enter your data');
+    } else {
+      CreatUser();
+    }
+  };
 
   return (
     <BaseView>
+      <Loader loading={loading} />
+
       <BackButton onPress={() => navigation.goBack()} />
 
       <InputContainer>
@@ -87,7 +106,7 @@ const SignupScreen = ({navigation}) => {
           }
         />
       </InputContainer>
-      <Button>SUBMIT</Button>
+      <Button onPress={submit}>SUBMIT</Button>
     </BaseView>
   );
 };
