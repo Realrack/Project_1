@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import CheckBox from '@react-native-community/checkbox';
+import Toast from 'react-native-toast-message';
+
 import BaseView from '../../components/baseView.component';
 import {theme} from '../../infrastructure/theme';
 import Button from '../../components/button.component';
@@ -15,13 +17,24 @@ const OtpScreen = ({navigation}) => {
   const [code, setCode] = React.useState('');
 
   const submit = () => {
-    if (number.trim() === '' || number === null) {
-      alert('please enter number');
+    if (number.trim() === '' || number === null || number.length < 10) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter valid Mobile Number',
+      });
+    } else {
+      Toast.show({
+        type: 'success',
+        text1: 'Hello',
+        text2: 'Welcome To ICA 👋',
+      });
     }
   };
   return (
     <BaseView>
-      <Text mt={theme.space[5]} mb={theme.space[1]} fw title ta={'center'}>
+      <Toast />
+      <Text mt={theme.space[6]} mb={theme.space[1]} fw title ta={'center'}>
         Enter your Mobile no.
       </Text>
       <InputContainer>

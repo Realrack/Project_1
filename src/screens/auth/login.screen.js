@@ -9,6 +9,8 @@ import Button from '../../components/button.component';
 import InputContainer from '../../components/inputContainer.component';
 import Text from '../../components/text.component';
 import Loader from '../../components/loader.component';
+import {CreateUser} from '../../network/auth';
+import Toast from 'react-native-toast-message';
 
 const LoginScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(true);
@@ -18,30 +20,44 @@ const LoginScreen = ({navigation}) => {
 
   const login = () => {
     if (email === '' && password === '') {
-      alert('please enter Data');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter Data',
+      });
     } else if (email.trim() === '' || email === null) {
-      alert('enter your email');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter your Email',
+      });
     } else if (password.trim() === '' || password === null) {
-      alert('enter your password');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter your Password',
+      });
     } else {
       setLoading(true);
-      CreatUser(email, password)
-        .then(res => {
-          console.log(res, 'usercreate');
-          alert(res);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.log(error, 'createusererror');
-          setLoading(false);
-        });
+      CreateUser();
+      // CreateUser(email, password)
+      //   .then(res => {
+      //     console.log(res, 'usercreate');
+      //     alert(res);
+      //     setLoading(false);
+      //   })
+      //   .catch(error => {
+      //     console.log(error, 'createusererror');
+      //     setLoading(false);
+      //   });
     }
   };
 
   return (
     <BaseView>
+      <Toast />
       <Loader loading={loading} />
-      <Text mt={theme.space[5]} ta={'center'} mb={theme.space[1]} fw title>
+      <Text mt={theme.space[6]} ta={'center'} mb={theme.space[1]} fw title>
         Enter your Email-Id & Password
       </Text>
       <InputContainer>

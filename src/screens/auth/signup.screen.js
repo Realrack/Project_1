@@ -11,6 +11,7 @@ import BackButton from '../../components/backButton.component';
 import InputContainer from '../../components/inputContainer.component';
 import Text from '../../components/text.component';
 import Loader from '../../components/loader.component';
+import Toast from 'react-native-toast-message';
 
 const SignupScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(true);
@@ -24,19 +25,25 @@ const SignupScreen = ({navigation}) => {
   const submit = () => {
     if (
       name.trim() === '' ||
-      (name == 'null' && email.trim() == '') ||
-      (email == 'null' && password.trim() == '') ||
-      (password == 'null' && confirmPassword.trim() == '') ||
-      confirmPassword == 'null'
+      (name === 'null' && email.trim() === '') ||
+      (email === 'null' && password.trim() === '') ||
+      (password === 'null' && confirmPassword.trim() === '') ||
+      confirmPassword === 'null'
     ) {
-      alert('enter your data');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter Data',
+      });
     } else {
+      setLoading(true);
       CreatUser();
     }
   };
 
   return (
     <BaseView>
+      <Toast />
       <Loader loading={loading} />
 
       <BackButton onPress={() => navigation.goBack()} />
