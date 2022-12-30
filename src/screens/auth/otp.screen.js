@@ -33,21 +33,15 @@ const OtpScreen = ({navigation}) => {
   };
   return (
     <BaseView>
-      <Toast />
       <Text mt={theme.space[6]} mb={theme.space[1]} fw title ta={'center'}>
         Enter your Mobile no.
       </Text>
       <InputContainer>
         <Input
           value={number}
-          left={
-            <TextInput.Icon
-              icon={'phone'}
-              iconColor={theme.colors.brand.primary}
-            />
-          }
           setValue={text => setNumber(text)}
           label="Mobile"
+          isPhone
         />
 
         <View style={styles.checkTextContiner}>

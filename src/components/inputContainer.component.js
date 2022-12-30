@@ -2,8 +2,8 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {theme} from '../infrastructure/theme';
 
-export default function InputContainer({children}) {
-  return <View style={styles.inputContainer}>{children}</View>;
+export default function InputContainer({children, style}) {
+  return <View style={[styles.inputContainer, style]}>{children}</View>;
 }
 const styles = StyleSheet.create({
   inputContainer: {

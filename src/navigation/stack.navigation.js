@@ -12,24 +12,26 @@ import LoaderComponent from '../components/loader.component';
 const StackScreen = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="OTP"
-        screenOptions={{
-          headerShown: false,
-          statusBarColor: theme.colors.brand.tertiary,
-        }}>
-        <Stack.Screen name="OTP" component={OtpScreen} />
-        <Stack.Screen
-          options={{statusBarColor: '#fff'}}
-          name="Loader"
-          component={LoaderComponent}
-        />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="Forgot" component={ForgotScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="OTP"
+          screenOptions={{
+            headerShown: false,
+            statusBarColor: theme.colors.brand.tertiary,
+          }}>
+          <Stack.Screen name="OTP" component={OtpScreen} />
+          <Stack.Screen
+            options={{statusBarColor: '#fff'}}
+            name="Loader"
+            component={LoaderComponent}
+          />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="Forgot" component={ForgotScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 export default StackScreen;

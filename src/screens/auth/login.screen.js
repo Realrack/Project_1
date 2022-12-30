@@ -9,53 +9,43 @@ import Button from '../../components/button.component';
 import InputContainer from '../../components/inputContainer.component';
 import Text from '../../components/text.component';
 import Loader from '../../components/loader.component';
-import {CreateUser} from '../../network/auth';
+import {SignInUser} from '../../network/auth';
 import Toast from 'react-native-toast-message';
 
 const LoginScreen = ({navigation}) => {
-  const [passwordVisible, setPasswordVisible] = useState(true);
   const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
   const [password, setPassword] = useState(__DEV__ ? '123456789' : '');
   const [loading, setLoading] = useState(false);
 
   const login = () => {
-    if (email === '' && password === '') {
+    if (
+      (email == '' &&
+        password == '' &&
+        (email.trim() == '' || email == 'null') &&
+        password.trim() == '') ||
+      password == 'null'
+    ) {
       Toast.show({
         type: 'error',
-        text1: 'Error',
-        text2: 'Please enter Data',
-      });
-    } else if (email.trim() === '' || email === null) {
-      Toast.show({
-        type: 'error',
-        text1: 'Error',
-        text2: 'Please enter your Email',
-      });
-    } else if (password.trim() === '' || password === null) {
-      Toast.show({
-        type: 'error',
-        text1: 'Error',
-        text2: 'Please enter your Password',
+        text1: 'login',
+        text2: 'Plz Enter Data👋',
       });
     } else {
       setLoading(true);
-      CreateUser();
-      // CreateUser(email, password)
-      //   .then(res => {
-      //     console.log(res, 'usercreate');
-      //     alert(res);
-      //     setLoading(false);
-      //   })
-      //   .catch(error => {
-      //     console.log(error, 'createusererror');
-      //     setLoading(false);
-      //   });
+      SignInUser(email, password)
+        .then(() => {
+          setLoading(false);
+          navigation.navigate('OTP');
+        })
+        .catch(error => {
+          setLoading(false);
+          alert(error);
+        });
     }
   };
 
   return (
     <BaseView>
-      <Toast />
       <Loader loading={loading} />
       <Text mt={theme.space[6]} ta={'center'} mb={theme.space[1]} fw title>
         Enter your Email-Id & Password
@@ -65,33 +55,14 @@ const LoginScreen = ({navigation}) => {
           value={email}
           setValue={text => setEmail(text)}
           label="Email"
-          left={
-            <TextInput.Icon
-              icon={'email'}
-              iconColor={theme.colors.brand.primary}
-            />
-          }
+          isEmail
         />
         <Input
           value={password}
           setValue={text => setPassword(text)}
           label="Password"
-          secureTextEntry={passwordVisible}
-          right={
-            <TextInput.Icon
-              icon={passwordVisible ? 'eye' : 'eye-off'}
-              onPress={() => setPasswordVisible(!passwordVisible)}
-              iconColor={theme.colors.brand.primary}
-            />
-          }
-          left={
-            <TextInput.Icon
-              icon={'lock'}
-              iconColor={theme.colors.brand.primary}
-            />
-          }
+          isPassword
         />
-
         <TouchableOpacity
           onPress={() => navigation.navigate('Forgot')}
           style={styles.forgot}>

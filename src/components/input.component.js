@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {StyleSheet} from 'react-native';
 import {theme} from '../infrastructure/theme';
@@ -7,19 +7,41 @@ import {TextInput} from 'react-native-paper';
 export default function Input({
   placeholder,
   label,
-  email,
-  phone,
   style,
   value,
   right,
   secureTextEntry,
   setValue,
+  isPassword,
+  isEmail,
+  isPhone,
+  isUser,
   ...rest
 }) {
   let keyboardType = 'email-address';
   if (label === 'Mobile' || label === 'Paste your Code') {
     keyboardType = 'numeric';
   }
+
+  let left = left;
+  if (isPassword) {
+    left = (
+      <TextInput.Icon icon={'lock'} iconColor={theme.colors.brand.primary} />
+    );
+  } else if (isEmail) {
+    left = (
+      <TextInput.Icon icon={'email'} iconColor={theme.colors.brand.primary} />
+    );
+  } else if (isUser) {
+    left = (
+      <TextInput.Icon icon={'account'} iconColor={theme.colors.brand.primary} />
+    );
+  } else if (isPhone) {
+    left = (
+      <TextInput.Icon icon={'phone'} iconColor={theme.colors.brand.primary} />
+    );
+  }
+  const [passwordVisible, setPasswordVisible] = useState(true);
 
   return (
     <TextInput
@@ -29,11 +51,21 @@ export default function Input({
       underlineColor={theme.colors.ui.disabled}
       value={value}
       onChangeText={setValue}
-      secureTextEntry={secureTextEntry}
+      secureTextEntry={isPassword ? passwordVisible : null}
       label={label}
+      left={left}
       placeholder={placeholder}
-      keyboardType={keyboardType}
-      right={right}
+      right={
+        isPassword ? (
+          <TextInput.Icon
+            icon={passwordVisible ? 'eye' : 'eye-off'}
+            iconColor={theme.colors.brand.primary}
+            onPress={() => setPasswordVisible(!passwordVisible)}
+          />
+        ) : (
+          right
+        )
+      }
       style={[styles.input, style]}
     />
   );

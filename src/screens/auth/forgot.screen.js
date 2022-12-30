@@ -26,7 +26,6 @@ export default function ForgotScreen({navigation}) {
 
   return (
     <BaseView>
-      <Toast />
       <BackButton onPress={() => navigation.goBack()} />
       <Text title fw ta={'center'}>
         Enter Your Email-Id
@@ -36,12 +35,7 @@ export default function ForgotScreen({navigation}) {
           value={emailid}
           setValue={text => setEmailid(text)}
           label="Email"
-          left={
-            <TextInput.Icon
-              icon={'email'}
-              iconColor={theme.colors.brand.primary}
-            />
-          }
+          isEmail
         />
       </InputContainer>
       <Button onPress={submit}>SUBMIT</Button>
