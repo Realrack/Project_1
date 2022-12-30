@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {TextInput} from 'react-native-paper';
 
 import BaseView from '../../components/baseView.component';
 import {theme} from '../../infrastructure/theme';

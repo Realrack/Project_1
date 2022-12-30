@@ -18,9 +18,11 @@ export default function Input({
   isUser,
   ...rest
 }) {
-  let keyboardType = 'email-address';
+  let keyboardType = 'default';
   if (label === 'Mobile' || label === 'Paste your Code') {
     keyboardType = 'numeric';
+  } else if (label === 'Email' || label === 'Name') {
+    keyboardType = 'email-address';
   }
 
   let left = left;
@@ -54,6 +56,7 @@ export default function Input({
       secureTextEntry={isPassword ? passwordVisible : null}
       label={label}
       left={left}
+      keyboardType={keyboardType}
       placeholder={placeholder}
       right={
         isPassword ? (

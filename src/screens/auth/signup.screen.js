@@ -11,17 +11,26 @@ import BackButton from '../../components/backButton.component';
 import InputContainer from '../../components/inputContainer.component';
 import Text from '../../components/text.component';
 import Loader from '../../components/loader.component';
-import {createValidation} from '../../Validation/auth';
+import {createValidation} from '../../validation/auth';
 
 const SignupScreen = ({navigation}) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [name, setName] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
+  const [password, setPassword] = useState(__DEV__ ? '123456789' : '');
+  const [name, setName] = useState(__DEV__ ? 'Ashish' : '');
+  const [confirmPassword, setConfirmPassword] = useState(
+    __DEV__ ? '123456789' : '',
+  );
   const [loading, setLoading] = useState(false);
 
   const submit = async () => {
-    if (email === '' || password === '' || name === '') {
+    if (
+      email.trim() === '' ||
+      email === null ||
+      password.value.trim() === '' ||
+      password === null ||
+      name.trim() === '' ||
+      name === null
+    ) {
       Toast.show({
         type: 'error',
         text1: 'Create',
@@ -70,7 +79,7 @@ const SignupScreen = ({navigation}) => {
         });
       console.log(error);
       setTimeout(() => {
-        setLoading(false);
+        //setLoading(false);
         navigation.replace('Login');
       }, 3000);
     }
@@ -79,9 +88,7 @@ const SignupScreen = ({navigation}) => {
   return (
     <BaseView>
       <Loader loading={loading} />
-
       <BackButton onPress={() => navigation.goBack()} />
-
       <InputContainer style={{marginTop: theme.space[5]}}>
         <Text fw h5 ta={'center'}>
           Enter Details
