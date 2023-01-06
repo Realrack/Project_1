@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-
 import BaseView from '../../components/baseView.component';
 import {theme} from '../../infrastructure/theme';
 import Input from '../../components/input.component';
@@ -15,7 +14,6 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
   const [password, setPassword] = useState(__DEV__ ? '123456789' : '');
   const [loading, setLoading] = useState(false);
-
   const login = () => {
     if (
       (email == '' &&
@@ -34,7 +32,6 @@ const LoginScreen = ({navigation}) => {
       SignInUser(email, password)
         .then(() => {
           setLoading(false);
-          navigation.navigate('OTP');
         })
         .catch(error => {
           setLoading(false);
@@ -42,7 +39,6 @@ const LoginScreen = ({navigation}) => {
         });
     }
   };
-
   return (
     <BaseView>
       <Loader loading={loading} />
@@ -70,11 +66,9 @@ const LoginScreen = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </InputContainer>
-
       <Button style={styles.touch} onPress={login}>
         Login
       </Button>
-
       <TouchableOpacity
         onPress={() => navigation.navigate('Signup')}
         style={styles.signup}>
@@ -90,7 +84,6 @@ const LoginScreen = ({navigation}) => {
   );
 };
 export default LoginScreen;
-
 const styles = StyleSheet.create({
   forgot: {
     marginTop: theme.space[3],

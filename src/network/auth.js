@@ -7,18 +7,15 @@ export const CreateUser = data => {
       .createUserWithEmailAndPassword(data.email, data.password)
       .then(async () => {
         await SaveUser(data);
-        console.log('User account created & signed in!');
         resolve('Success');
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-          reject({massage: 'That email address is already in use!'});
+          reject({message: 'This email address is already in use!'});
         }
 
         if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-          reject({massage: 'That email address is invalid!'});
+          reject({message: 'This email address is invalid!'});
         }
       });
   });
@@ -35,7 +32,6 @@ export const SignInUser = (email, password) => {
       });
   });
 };
-
 export const SaveUser = data => {
   return new Promise(function (resolve, reject) {
     const UserId = auth().currentUser.uid;
@@ -43,12 +39,10 @@ export const SaveUser = data => {
       .ref(`/users/${UserId}`)
       .set({
         name: data.name,
-        phone: data.number,
         email: auth().currentUser.email,
         uid: UserId,
       })
       .then(() => resolve('Data set.'))
-
       .catch(error => {
         reject(error);
       });

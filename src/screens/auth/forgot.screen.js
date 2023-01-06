@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
-
-import {TextInput} from 'react-native-paper';
 import {theme} from '../../infrastructure/theme';
-
 import BaseView from '../../components/baseView.component';
 import Button from '../../components/button.component';
 import Input from '../../components/input.component';
@@ -12,8 +9,9 @@ import InputContainer from '../../components/inputContainer.component';
 import Toast from 'react-native-toast-message';
 
 export default function ForgotScreen({navigation}) {
-  const [emailid, setEmailid] = useState();
-
+  const [emailid, setEmailid] = useState(
+    __DEV__ ? 'ashishtanwar2191@gmail.com' : '',
+  );
   const submit = () => {
     if (emailid.trim() === '' || emailid === null) {
       Toast.show({
@@ -23,11 +21,10 @@ export default function ForgotScreen({navigation}) {
       });
     }
   };
-
   return (
     <BaseView>
       <BackButton onPress={() => navigation.goBack()} />
-      <Text title fw ta={'center'}>
+      <Text mt={theme.space[5]} title fw ta={'center'}>
         Enter Your Email-Id
       </Text>
       <InputContainer>

@@ -5,7 +5,6 @@ import {theme} from '../infrastructure/theme';
 import {TextInput} from 'react-native-paper';
 
 export default function Input({
-  placeholder,
   label,
   style,
   value,
@@ -57,7 +56,6 @@ export default function Input({
       label={label}
       left={left}
       keyboardType={keyboardType}
-      placeholder={placeholder}
       right={
         isPassword ? (
           <TextInput.Icon

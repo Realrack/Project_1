@@ -1,26 +1,37 @@
 import Toast from 'react-native-toast-message';
+var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//Minimum eight characters, at least one letter, one number and one special character:
+var passwordRegex =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
 export const createValidation = data => {
-  console.log(
-    !data.name,
-    data.name.length < 3,
-    data.name.trim() == '',
-    '======',
-  );
-  //   console.log(!data.name || data.name.length < 3 || data.name.trim() == '');
   if (!data.name || data.name.length < 3 || data.name.trim() == '') {
     Toast.show({
       type: 'error',
       text1: 'Create',
       text2: 'Plz Fill Valid name👋',
     });
-  }
-  if (!data.number || data.number.length < 10 || data.number.trim() == '') {
+    return true;
+  } else if (!data.email || !emailRegex.test(data.email)) {
     Toast.show({
       type: 'error',
       text1: 'Create',
-      text2: 'Plz Fill Valid name👋',
+      text2: 'Plz Fill Valid email👋',
     });
-  }
-  return;
+    return true;
+  } else if (!data.password || !passwordRegex.test(data.password)) {
+    Toast.show({
+      type: 'error',
+      text1: 'Create',
+      text2: 'Plz Fill Valid password👋',
+    });
+    return true;
+  } else if (data.password !== data.confirmPassword) {
+    Toast.show({
+      type: 'error',
+      text1: 'Create',
+      text2: 'Password and confirmPassword not match👋',
+    });
+    return true;
+  } else return false;
 };

@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import CreateUser from '../../network/auth';
+import {CreateUser} from '../../network/auth';
 import Toast from 'react-native-toast-message';
-
 import {theme} from '../../infrastructure/theme';
-
 import BaseView from '../../components/baseView.component';
 import Button from '../../components/button.component';
 import Input from '../../components/input.component';
@@ -15,47 +13,17 @@ import {createValidation} from '../../validation/auth';
 
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
-  const [password, setPassword] = useState(__DEV__ ? '123456789' : '');
+  const [password, setPassword] = useState(__DEV__ ? '12345Aab@' : '');
   const [name, setName] = useState(__DEV__ ? 'Ashish' : '');
   const [confirmPassword, setConfirmPassword] = useState(
-    __DEV__ ? '123456789' : '',
+    __DEV__ ? '12345Aab@' : '',
   );
   const [loading, setLoading] = useState(false);
-
   const submit = async () => {
-    if (
-      email.trim() === '' ||
-      email === null ||
-      password.value.trim() === '' ||
-      password === null ||
-      name.trim() === '' ||
-      name === null
-    ) {
-      Toast.show({
-        type: 'error',
-        text1: 'Create',
-        text2: 'Plz Enter Data👋',
-      });
-    } else if (password !== confirmPassword) {
-      Toast.show({
-        type: 'error',
-        text1: 'Password',
-        text2: 'Plz Enter Data👋',
-      });
-    } else {
-      try {
-        setLoading(true);
-        const res = await CreateUser(email, password);
-        console.log(res, 'usercreate');
-        setLoading(false);
-      } catch (error) {
-        console.log(error, 'createusererror');
-        setLoading(false);
-      }
-
+    let data = {email, password, name, confirmPassword};
+    let error = createValidation(data);
+    if (!error) {
       setLoading(true);
-      let data = {email, password, name, confirmPassword};
-      let error = createValidation(data);
       CreateUser(data)
         .then(res => {
           console.log(res, 'usercreate');
@@ -64,8 +32,6 @@ const SignupScreen = ({navigation}) => {
             text1: 'Create',
             text2: 'your are welcome',
           });
-          navigation.navigate('OTP');
-
           setLoading(false);
         })
         .catch(error => {
@@ -77,14 +43,13 @@ const SignupScreen = ({navigation}) => {
           });
           setLoading(false);
         });
-      console.log(error);
-      setTimeout(() => {
-        //setLoading(false);
-        navigation.replace('Login');
-      }, 3000);
     }
+    console.log(error);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.replace('Login');
+    }, 3000);
   };
-
   return (
     <BaseView>
       <Loader loading={loading} />
