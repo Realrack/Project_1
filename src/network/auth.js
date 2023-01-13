@@ -41,7 +41,6 @@ export const GetUser = data => {
       .once('value')
       .then(snapshot => {
         resolve(snapshot.val());
-        console.log('User data: ', snapshot.val());
       })
       .catch(error => {
         reject(error);

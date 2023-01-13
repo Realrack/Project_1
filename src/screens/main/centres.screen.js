@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import BaseView from '../../components/baseView.component';
 import WebView from 'react-native-webview';
 import BackButton from '../../components/backButton.component';

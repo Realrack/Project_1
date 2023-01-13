@@ -12,13 +12,11 @@ import Loader from '../../components/loader.component';
 import {createValidation} from '../../validation/auth';
 
 const SignupScreen = ({navigation}) => {
-  const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
-  const [phone, setPhone] = useState(__DEV__ ? '8094000177' : '');
-  const [password, setPassword] = useState(__DEV__ ? '12345Aab@' : '');
-  const [name, setName] = useState(__DEV__ ? 'Ashish' : '');
-  const [confirmPassword, setConfirmPassword] = useState(
-    __DEV__ ? '12345Aab@' : '',
-  );
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const submit = async () => {
     let data = {email, password, name, phone, confirmPassword};
@@ -27,7 +25,6 @@ const SignupScreen = ({navigation}) => {
       setLoading(true);
       CreateUser(data)
         .then(res => {
-          console.log(res, 'usercreate');
           Toast.show({
             type: 'success',
             text1: 'Create',
@@ -36,7 +33,6 @@ const SignupScreen = ({navigation}) => {
           setLoading(false);
         })
         .catch(error => {
-          console.log(error, 'createusererror');
           Toast.show({
             type: 'error',
             text1: 'Create',

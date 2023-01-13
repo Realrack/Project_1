@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import BaseView from '../../components/baseView.component';
 import BackButton from '../../components/backButton.component';
 import WebView from 'react-native-webview';
@@ -11,14 +11,12 @@ export default function EthicalHacking({navigation}) {
     <BaseView>
       <Loader loading={loading} />
 
-      <BackButton
+      <BackButton onPress={() => navigation.goBack()} />
+      <WebView
         onLoad={() => setLoading(false)}
         onLoadStart={() => setLoading(true)}
-        onPress={() =>
-          navigation.goBack('https://indiancoding.com/course-jquery.html')
-        }
+        source={{uri: 'https://indiancoding.com/course-data-science.html'}}
       />
-      <WebView source={{uri: ''}} />
     </BaseView>
   );
 }

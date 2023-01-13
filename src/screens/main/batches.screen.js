@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import WebView from 'react-native-webview';
 import BaseView from '../../components/baseView.component';
 import BackButton from '../../components/backButton.component';
@@ -9,12 +9,12 @@ export default function BatchesScreen({navigation}) {
   return (
     <BaseView>
       <Loader loading={loading} />
-      <BackButton
+      <BackButton onPress={() => navigation.goBack()} />
+      <WebView
         onLoad={() => setLoading(false)}
         onLoadStart={() => setLoading(true)}
-        onPress={() => navigation.goBack()}
+        source={{uri: 'https://indiancoding.com/courses.html'}}
       />
-      <WebView source={{uri: 'https://indiancoding.com/courses.html'}} />
     </BaseView>
   );
 }

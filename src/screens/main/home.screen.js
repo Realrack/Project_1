@@ -29,13 +29,9 @@ export default function HomeScreen({navigation}) {
     try {
       let response = await GetUser();
       setUser(response);
-      console.log(response);
-    } catch (error) {
-      console.log(error, 'Showing Error user Api');
-    }
+    } catch (error) {}
   };
 
-  console.log(auth().currentUser);
   return (
     <BaseView style={styles.container}>
       <View style={styles.header}>

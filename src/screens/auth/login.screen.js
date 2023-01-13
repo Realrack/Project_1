@@ -11,8 +11,8 @@ import {SignInUser} from '../../network/auth';
 import Toast from 'react-native-toast-message';
 
 const LoginScreen = ({navigation}) => {
-  const [email, setEmail] = useState(__DEV__ ? 'ashishqwe@gmail.com' : '');
-  const [password, setPassword] = useState(__DEV__ ? '12345Aab@' : '');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const login = () => {
     if (

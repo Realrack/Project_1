@@ -28,7 +28,8 @@ const DemoScreen = ({navigation}) => {
             <ImageBackground
               imageStyle={{borderRadius: 15}}
               source={images.webdev}
-              style={styles.coursesbg}></ImageBackground>
+              style={styles.coursesbg}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -37,7 +38,8 @@ const DemoScreen = ({navigation}) => {
             <ImageBackground
               imageStyle={{borderRadius: 15}}
               source={images.appdev}
-              style={styles.coursesbg}></ImageBackground>
+              style={styles.coursesbg}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('Ethcking')}
@@ -45,7 +47,8 @@ const DemoScreen = ({navigation}) => {
             <ImageBackground
               imageStyle={{borderRadius: 15}}
               source={images.ethcking}
-              style={styles.coursesbg}></ImageBackground>
+              style={styles.coursesbg}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('Game')}
@@ -53,7 +56,8 @@ const DemoScreen = ({navigation}) => {
             <ImageBackground
               imageStyle={{borderRadius: 15}}
               source={images.gamedev}
-              style={styles.coursesbg}></ImageBackground>
+              style={styles.coursesbg}
+            />
           </TouchableOpacity>
         </View>
       </ScrollView>
