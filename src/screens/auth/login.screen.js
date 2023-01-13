@@ -11,16 +11,16 @@ import {SignInUser} from '../../network/auth';
 import Toast from 'react-native-toast-message';
 
 const LoginScreen = ({navigation}) => {
-  const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
-  const [password, setPassword] = useState(__DEV__ ? '123456789' : '');
+  const [email, setEmail] = useState(__DEV__ ? 'ashishqwe@gmail.com' : '');
+  const [password, setPassword] = useState(__DEV__ ? '12345Aab@' : '');
   const [loading, setLoading] = useState(false);
   const login = () => {
     if (
-      (email == '' &&
-        password == '' &&
-        (email.trim() == '' || email == 'null') &&
-        password.trim() == '') ||
-      password == 'null'
+      (email === '' &&
+        password === '' &&
+        (email.trim() === '' || email === 'null') &&
+        password.trim() === '') ||
+      password === 'null'
     ) {
       Toast.show({
         type: 'error',
@@ -37,6 +37,7 @@ const LoginScreen = ({navigation}) => {
           setLoading(false);
           alert(error);
         });
+      navigation.navigate('RootStack');
     }
   };
   return (

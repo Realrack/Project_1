@@ -13,6 +13,7 @@ import {createValidation} from '../../validation/auth';
 
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState(__DEV__ ? 'ashish@gmail.com' : '');
+  const [phone, setPhone] = useState(__DEV__ ? '8094000177' : '');
   const [password, setPassword] = useState(__DEV__ ? '12345Aab@' : '');
   const [name, setName] = useState(__DEV__ ? 'Ashish' : '');
   const [confirmPassword, setConfirmPassword] = useState(
@@ -20,7 +21,7 @@ const SignupScreen = ({navigation}) => {
   );
   const [loading, setLoading] = useState(false);
   const submit = async () => {
-    let data = {email, password, name, confirmPassword};
+    let data = {email, password, name, phone, confirmPassword};
     let error = createValidation(data);
     if (!error) {
       setLoading(true);
@@ -44,11 +45,6 @@ const SignupScreen = ({navigation}) => {
           setLoading(false);
         });
     }
-    console.log(error);
-    setTimeout(() => {
-      setLoading(false);
-      navigation.replace('Login');
-    }, 3000);
   };
   return (
     <BaseView>
@@ -69,6 +65,12 @@ const SignupScreen = ({navigation}) => {
           setValue={text => setEmail(text)}
           label="Email"
           isEmail
+        />
+        <Input
+          value={phone}
+          setValue={text => setPhone(text)}
+          label="Mobile"
+          isPhone
         />
         <Input
           isPassword

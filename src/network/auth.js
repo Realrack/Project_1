@@ -32,6 +32,22 @@ export const SignInUser = (email, password) => {
       });
   });
 };
+
+export const GetUser = data => {
+  return new Promise(function (resolve, reject) {
+    const UserId = auth().currentUser.uid;
+    database()
+      .ref(`/users/${UserId}`)
+      .once('value')
+      .then(snapshot => {
+        resolve(snapshot.val());
+        console.log('User data: ', snapshot.val());
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
 export const SaveUser = data => {
   return new Promise(function (resolve, reject) {
     const UserId = auth().currentUser.uid;
@@ -39,6 +55,7 @@ export const SaveUser = data => {
       .ref(`/users/${UserId}`)
       .set({
         name: data.name,
+        phone: data.phone,
         email: auth().currentUser.email,
         uid: UserId,
       })
